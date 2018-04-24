@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="museum.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="museum.Controller">
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
@@ -92,12 +92,12 @@
                   </Label>
                   <ImageView fitHeight="128.0" fitWidth="282.0" layoutX="14.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@old_car_i___ford_a_by_tailcat-d2xl2dr.png" />
+                        <Image url="@car.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="250.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@PNGPIX-COM-Royal-Enfield-Classic-500-Green-Motorcycle-Bike-PNG-Image.png" />
+                        <Image url="@bike.png" />
                      </image>
                   </ImageView>
                   <Label layoutX="143.0" layoutY="230.0" text="Welcome to the Vehicle Museum." />
