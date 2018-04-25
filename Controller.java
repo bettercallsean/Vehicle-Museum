@@ -8,13 +8,57 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.collections.ObservableList;
+import java.io.*;
 import java.text.NumberFormat;
 
 public class Controller {
 
-    private Vehicles vhcl[] = new Vehicles[50];
+    private Vehicles[] vhcl = new Vehicles[50];
     private int vehicleCount = 0;
 
+    // Writes the Vehicle objects to a file
+    private void writeObjectToFile (){
+        try {
+            File dir = new File("vehicles.txt");
+            FileOutputStream f = new FileOutputStream(dir);
+            ObjectOutputStream o = new ObjectOutputStream(f);
+
+            for (Vehicles vehicle : vhcl)
+                o.writeObject(vehicle);
+
+            f.close();
+            o.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream");
+        }
+    }
+
+
+    private void readObjectFromFile (){
+        try {
+            File dir = new File("vehicles.txt");
+            FileInputStream fi = new FileInputStream(dir);
+            ObjectInputStream oi = new ObjectInputStream(fi);
+
+            Vehicles obj;
+
+            while ((obj = (Vehicles)oi.readObject()) != null) {
+                vhcl[vehicleCount] = obj;
+                vehicleCount++;
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream");
+        }  catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     // Used for setting the visibility of different scenes (not very efficient but I needed something for now)
 
@@ -22,6 +66,11 @@ public class Controller {
     private void loadVehicleTypeValues(){
         vehicleType.getItems().addAll("Car", "Motorbike");
     }
+
+    public void initialize(){
+        readObjectFromFile();
+    }
+
     @FXML private ChoiceBox<String> vehicleType;
     @FXML private HBox carBox;
     @FXML private HBox bikeBox;
@@ -43,9 +92,10 @@ public class Controller {
     @FXML private ChoiceBox<String> bikeType;
     @FXML private TextField bikeEngineSize;
     @FXML private TextField yearSearch;
-    @FXML public void vehicleAdder(){
-        if (vehicleType.getItems().isEmpty())
+    @FXML public void vehicleAdder() {
+        if (vehicleType.getItems().isEmpty()){
             loadVehicleTypeValues();
+        }
         vehicleForm.setVisible(true);
         yearListerForm.setVisible(false);
         listEngines.setVisible(false);
@@ -164,6 +214,7 @@ public class Controller {
                 if (Integer.parseInt(engineSize.getText()) != 0)
                     engineS = Integer.parseInt(engineSize.getText());
                 vhcl[vehicleCount] = new Car(reg, colour, name, year, vhclValue, engine, doors, seats, engineS);
+                writeObjectToFile();
                 vehicleCount++;
 
                 noOfDoors.clear();
@@ -182,6 +233,7 @@ public class Controller {
                     bikeEngineS = Integer.parseInt(bikeEngineSize.getText());
 
                 vhcl[vehicleCount] = new Bike(reg, colour, name, year, vhclValue, bike, bikeEngineS);
+                writeObjectToFile();
                 vehicleCount++;
                 bikeEngineSize.clear();
             }
@@ -228,10 +280,12 @@ public class Controller {
 
     }
 
+    @FXML private Label vehicleCounter;
     @FXML private ListView<String> vehicleEngineLister;
     @FXML private void oneLitreEngine() {
         vehicleEngineLister.getItems().clear();
         ObservableList<String> list = vehicleEngineLister.getItems();
+        int vehiclesTotal = 0;
 
         for (int count = 0; count < vehicleCount; count++)
         {
@@ -241,6 +295,7 @@ public class Controller {
                 if (carObject.carEngineSize() >= 1)
                 {
                     list.add(getCarInfo(carObject));
+                    vehiclesTotal++;
                 }
             }
 
@@ -250,12 +305,17 @@ public class Controller {
                 if (bikeObject.bikeEngineSize() >= 1000)
                 {
                     list.add(getBikeInfo(bikeObject));
+                    vehiclesTotal++;
                 }
             }
         }
 
         if (list.size() == 0)
             list.add("No results found!");
+        else if (vehiclesTotal == 1)
+            vehicleCounter.setText(vehiclesTotal + " vehicle found.");
+        else
+            vehicleCounter.setText(vehiclesTotal + " vehicles found.");
     }
 
 
@@ -277,7 +337,7 @@ public class Controller {
         if (vehiclesTotal == 0)
             list.add("No results found!");
         else if (vehiclesTotal == 1)
-            bikeCounter.setText(vehiclesTotal + " bike found");
+            bikeCounter.setText(vehiclesTotal + " bike found.");
         else
             bikeCounter.setText(vehiclesTotal + " bikes found.");
     }
@@ -300,7 +360,7 @@ public class Controller {
         if (vehiclesTotal == 0)
             list.add("No results found!");
         else if (vehiclesTotal == 1)
-            carCounter.setText(vehiclesTotal + " car found");
+            carCounter.setText(vehiclesTotal + " car found.");
         else
             carCounter.setText(vehiclesTotal + " cars found.");
     }
