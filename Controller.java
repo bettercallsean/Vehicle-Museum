@@ -69,6 +69,7 @@ public class Controller {
 
     public void initialize(){
         readObjectFromFile();
+        loadVehicleTypeValues();
     }
 
     @FXML private ChoiceBox<String> vehicleType;
@@ -93,9 +94,6 @@ public class Controller {
     @FXML private TextField bikeEngineSize;
     @FXML private TextField yearSearch;
     @FXML public void vehicleAdder() {
-        if (vehicleType.getItems().isEmpty()){
-            loadVehicleTypeValues();
-        }
         vehicleForm.setVisible(true);
         yearListerForm.setVisible(false);
         listEngines.setVisible(false);
