@@ -13,8 +13,7 @@ class Vehicles implements Serializable {
 	private String licencePlate, colour, name;
 	private int yearOfManufacture, value;
 
-	Vehicles (String lp, String c, String vn, int yom, int v)
-	{
+	Vehicles (String lp, String c, String vn, int yom, int v) {
 		licencePlate = lp;
 		colour = c;
 		name = vn;
@@ -22,39 +21,33 @@ class Vehicles implements Serializable {
 		value = v;
 	}
 
-	String getReg()
-	{
+	String getReg() {
 		return licencePlate;
 	}
 
-	String getColour()
-	{
+	String getColour() {
 		return colour;
 	}
 
-	String getName()
-	{
+	String getName() {
 		return name;
 	}
 
-	int getManufactureYear()
-	{
+	int getManufactureYear() {
 		return yearOfManufacture;
 	}
 
-	int getValue()
-	{
+	int getValue() {
 		return value;
 	}
 }
 
-class Car extends Vehicles
-{
+class Car extends Vehicles {
 	private String engineType;
-	private int noOfDoors, noOfSeats, engineSize;
+	private int noOfDoors, noOfSeats;
+	private double engineSize;
 
-	Car (String lp, String c, String nm, int yom, int v, String engine, int doors, int seats, int size)
-	{
+	Car (String lp, String c, String nm, int yom, int v, String engine, int doors, int seats, double size) {
 		super (lp, c, nm, yom, v);
 		engineType = engine;
 		noOfDoors = doors;
@@ -62,48 +55,39 @@ class Car extends Vehicles
 		engineSize = size;
 	}
 
-	String getEngineType()
-	{
+	String getEngineType() {
 		return engineType;
 	}
 
-	int getTotalDoors()
-	{
+	int getTotalDoors() {
 		return noOfDoors;
 	}
 
-	int getTotalSeats()
-	{
+	int getTotalSeats() {
 		return noOfSeats;
 	}
 
-	int carEngineSize()
-	{
+	double carEngineSize() {
 		return engineSize;
 	}
 
-
 }
 
-class Bike extends Vehicles
-{
+class Bike extends Vehicles {
 	private String bikeType;
 	private int engineSize;
 
-	Bike (String lp, String c, String vn, int yom, int v, String type, int engine)
-	{
+	Bike (String lp, String c, String vn, int yom, int v, String type, int engine) {
 		super (lp, c, vn, yom, v);
 		bikeType = type;
 		engineSize = engine;
 	}
 
-	String getBikeType()
-	{
+	String getBikeType() {
 		return bikeType;
 	}
 
-	int bikeEngineSize()
-	{
+	int bikeEngineSize() {
 		return engineSize;
 	}
 
