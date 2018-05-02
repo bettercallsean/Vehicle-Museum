@@ -36,7 +36,7 @@ public class Controller {
         }
     }
 
-
+    // Reads vehicle objects from a file
     private void readObjectFromFile (){
         try {
             File dir = new File("vehicles.txt");
@@ -201,7 +201,7 @@ public class Controller {
                 String engine = "";
                 int doors = 0;
                 int seats = 0;
-                int engineS = 0;
+                double engineS = 0;
 
                 if (!engineType.getValue().isEmpty())
                     engine = engineType.getValue();
@@ -209,8 +209,8 @@ public class Controller {
                     doors = Integer.parseInt(noOfDoors.getText());
                 if (Integer.parseInt(noOfSeats.getText()) != 0)
                     seats = Integer.parseInt(noOfSeats.getText());
-                if (Integer.parseInt(engineSize.getText()) != 0)
-                    engineS = Integer.parseInt(engineSize.getText());
+                if (Double.parseDouble(engineSize.getText()) != 0)
+                    engineS = Double.parseDouble(engineSize.getText());
                 vhcl[vehicleCount] = new Car(reg, colour, name, year, vhclValue, engine, doors, seats, engineS);
                 writeObjectToFile();
                 vehicleCount++;
@@ -252,21 +252,20 @@ public class Controller {
 
     // The different scenes used in the application
     @FXML private ListView<String> vehicleYearLister;
+    @FXML private Label yearCounter;
     @FXML private void yearLister(){
         vehicleYearLister.getItems().clear();
         ObservableList<String> list = vehicleYearLister.getItems();
 
-        for (int count = 0; count < vehicleCount; count++)
-        {
-            if (vhcl[count].getManufactureYear() == Integer.parseInt(yearSearch.getText()))
-            {
-                if (vhcl[count] instanceof Car)
-                {
+        for (int count = 0; count < vehicleCount; count++) {
+
+            if (vhcl[count].getManufactureYear() == Integer.parseInt(yearSearch.getText())) {
+                if (vhcl[count] instanceof Car) {
                     Car carObject = (Car) vhcl[count];
                     list.add(getCarInfo(carObject));
                 }
-                else if (vhcl[count] instanceof Bike)
-                {
+
+                else if (vhcl[count] instanceof Bike) {
                     Bike bikeObject = (Bike) vhcl[count];
                     list.add(getBikeInfo(bikeObject));
                 }
@@ -275,6 +274,10 @@ public class Controller {
 
         if (list.size() == 0)
             list.add("No results found!");
+        else if (list.size() == 1)
+            yearCounter.setText("1 vehicle found");
+        else
+            yearCounter.setText(list.size() + " vehicles found.");
 
     }
 
@@ -285,23 +288,21 @@ public class Controller {
         ObservableList<String> list = vehicleEngineLister.getItems();
         int vehiclesTotal = 0;
 
-        for (int count = 0; count < vehicleCount; count++)
-        {
-            if (vhcl[count] instanceof Car)
-            {
+        for (int count = 0; count < vehicleCount; count++) {
+
+            if (vhcl[count] instanceof Car) {
                 Car carObject = (Car) vhcl[count];
-                if (carObject.carEngineSize() >= 1)
-                {
+
+                if (carObject.carEngineSize() >= 1) {
                     list.add(getCarInfo(carObject));
                     vehiclesTotal++;
                 }
             }
 
-            else if (vhcl[count] instanceof Bike)
-            {
+            else if (vhcl[count] instanceof Bike) {
                 Bike bikeObject = (Bike) vhcl[count];
-                if (bikeObject.bikeEngineSize() >= 1000)
-                {
+
+                if (bikeObject.bikeEngineSize() >= 1000) {
                     list.add(getBikeInfo(bikeObject));
                     vehiclesTotal++;
                 }
@@ -348,8 +349,7 @@ public class Controller {
 
         int vehiclesTotal = 0;
         for (int count = 0; count < vehicleCount; count++) {
-            if (vhcl[count] instanceof Car)
-            {
+            if (vhcl[count] instanceof Car) {
                 Car carObject = (Car) vhcl[count];
                 vehiclesTotal ++;
                 list.add(getCarInfo(carObject));

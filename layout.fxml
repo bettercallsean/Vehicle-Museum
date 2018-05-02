@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="museum.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="museum.Controller">
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
@@ -202,7 +202,8 @@
                      </children>
                   </HBox>
                   <Region prefHeight="105.0" prefWidth="465.0" />
-                  <ListView fx:id="vehicleYearLister" prefHeight="260.0" prefWidth="465.0" />
+                  <Label fx:id="yearCounter" prefHeight="17.0" prefWidth="121.0" />
+                  <ListView fx:id="vehicleYearLister" prefHeight="275.0" prefWidth="465.0" />
                </children>
             </VBox>
             <VBox fx:id="listEngines" prefHeight="378.0" prefWidth="465.0" visible="false">
