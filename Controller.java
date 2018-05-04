@@ -380,14 +380,14 @@ public class Controller {
                 "\nEngine Type: " + vehicle.getEngineType() +
                 "\nNumber of doors: " + vehicle.getTotalDoors() +
                 "\nNumber of seats: " + vehicle.getTotalSeats() +
-                "\nEngine Size: " + vehicle.carEngineSize();
+                "\nEngine Size: " + vehicle.carEngineSize() + "L";
     }
 
     private String getBikeInfo(Bike vehicle){
 
         return getVehicleInfo(vehicle)+
                 "\nBike type: " + vehicle.getBikeType() +
-                "\nEngine Size (cc): " + vehicle.bikeEngineSize();
+                "\nEngine Size: " + vehicle.bikeEngineSize() + "cc";
     }
 }
 
