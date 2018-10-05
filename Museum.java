@@ -13,12 +13,12 @@ class Vehicles implements Serializable {
 	private String licencePlate, colour, name;
 	private int yearOfManufacture, value;
 
-	Vehicles (String lp, String c, String vn, int yom, int v) {
-		licencePlate = lp;
-		colour = c;
-		name = vn;
-		yearOfManufacture = yom;
-		value = v;
+	Vehicles (String licencePlate, String colour, String name, int yearOfManufacture, int value) {
+		this.licencePlate = licencePlate;
+		this.colour = colour;
+		this.name = name;
+		this.yearOfManufacture = yearOfManufacture;
+		this.value = value;
 	}
 
 	String getReg() {
@@ -47,12 +47,12 @@ class Car extends Vehicles {
 	private int noOfDoors, noOfSeats;
 	private double engineSize;
 
-	Car (String lp, String c, String nm, int yom, int v, String engine, int doors, int seats, double size) {
+	Car (String lp, String c, String nm, int yom, int v, String engineType, int noOfDoors, int noOfSeats, double engineSize) {
 		super (lp, c, nm, yom, v);
-		engineType = engine;
-		noOfDoors = doors;
-		noOfSeats = seats;
-		engineSize = size;
+		this.engineType = engineType;
+		this.noOfDoors = noOfDoors;
+		this.noOfSeats = noOfSeats;
+		this.engineSize = engineSize;
 	}
 
 	String getEngineType() {
@@ -77,10 +77,10 @@ class Bike extends Vehicles {
 	private String bikeType;
 	private int engineSize;
 
-	Bike (String lp, String c, String vn, int yom, int v, String type, int engine) {
+	Bike (String lp, String c, String vn, int yom, int v, String bikeType, int engineSize) {
 		super (lp, c, vn, yom, v);
-		bikeType = type;
-		engineSize = engine;
+		this.bikeType = bikeType;
+		this.engineSize = engineSize;
 	}
 
 	String getBikeType() {
